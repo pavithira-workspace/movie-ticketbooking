@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#07090d">
+    <title>Cinema India | Big Screen Stories</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" th:href="@{/css/style.css}" href="/css/style.css">
+</head>
+<body th:attr="data-selected-movie=${selectedMovieId}">
+<a class="skip-link" href="#mainContent">Skip to content</a>
+<div class="welcome-screen" id="welcomeScreen" aria-hidden="true">
+    <div class="welcome-mark"><span class="orbit-emblem"><i></i></span><span>CINEMA INDIA</span></div>
+    <p>PREPARING YOUR BIG SCREEN EXPERIENCE</p><div class="welcome-track"><span></span></div>
+</div>
+<div class="cursor-glow" id="cursorGlow"></div>
+<nav class="navbar navbar-expand-lg navbar-dark site-nav fixed-top" aria-label="Main navigation">
+    <div class="container">
+        <a class="navbar-brand brand-lockup" href="#home" aria-label="Cinema India home">
+            <span class="brand-mark"><i class="fa-solid fa-film"></i></span>
+            <span class="brand-text">CINEMA INDIA<small>HEROES · ACTION · BIG SCREEN</small></span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="mainNav">
+            <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-4">
+                <li class="nav-item"><a class="nav-link active" href="#home" data-nav-section="home" aria-current="location">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="#movies" data-nav-section="movies">Movies</a></li>
+                <li class="nav-item"><a class="nav-link" href="#movies" id="bookTicketsLink">Book tickets</a></li>
+                <li class="nav-item"><button class="nav-link nav-button" id="myBookingsButton">My bookings <span class="booking-count" id="bookingCount">0</span></button></li>
+                <li class="nav-item"><a class="nav-cta" href="#movies">GET TICKETS <i class="fa-solid fa-arrow-right"></i></a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<main id="mainContent" tabindex="-1">
+    <section class="hero-section" id="home">
+        <div class="hero-grid"></div><div class="hero-orb hero-orb-one"></div><div class="hero-orb hero-orb-two"></div>
+        <div class="container hero-content">
+            <div class="hero-backdrop" aria-hidden="true"><img id="heroBackdropImage" src="" alt=""></div>
+            <div class="hero-copy" id="heroCopy" aria-live="polite">
+                <p class="hero-kicker"><span class="hero-live-dot"></span> NOW SHOWING · CINEMA INDIA ORIGINALS</p>
+                <h1 id="heroTitle">YOUR NEXT<br><span>BIG SCREEN</span><br>ADVENTURE.</h1>
+                <p class="hero-subtitle" id="heroDescription">Discover stories made to be seen together. Find your film and book the best seat in your city.</p>
+                <div class="hero-details" id="heroDetails">
+                    <span class="hero-rating"><i class="fa-solid fa-star"></i> <b id="heroRating">—</b></span>
+                    <span class="hero-detail-divider"></span>
+                    <span id="heroDuration">—</span>
+                    <span class="hero-detail-divider"></span>
+                    <span id="heroYear">—</span>
+                </div>
+                <div class="hero-actions">
+                    <button class="btn-primary-glow hero-watch-button" id="watchMovieButton" type="button"><i class="fa-solid fa-ticket"></i> BOOK THIS MOVIE</button>
+                    <button class="text-link trailer-button" id="viewTrailerButton" type="button"><span class="play-icon"><i class="fa-solid fa-play"></i></span> VIEW TRAILER</button>
+                </div>
+                <div class="hero-carousel-nav">
+                    <button class="carousel-arrow" id="previousSlide" type="button" aria-label="Previous featured movie"><i class="fa-solid fa-arrow-left"></i></button>
+                    <div class="hero-indicators" id="heroIndicators" role="group" aria-label="Featured movies"></div>
+                    <button class="carousel-arrow" id="nextSlide" type="button" aria-label="Next featured movie"><i class="fa-solid fa-arrow-right"></i></button>
+                    <span class="hero-index" id="heroIndex">01 <span>/</span> 04</span>
+                </div>
+            </div>
+            <div class="hero-art" aria-label="Featured movie poster">
+                <div class="poster-halo"></div>
+                <figure class="hero-poster" id="heroPosterCard">
+                    <img id="heroPoster" src="" alt="">
+                    <div class="poster-overlay"></div>
+                    <figcaption class="hero-poster-caption"><span id="heroCategory">FEATURED FILM</span><strong id="heroPosterTitle">CINEMA INDIA</strong><small>NOW SHOWING</small></figcaption>
+                </figure>
+                <div class="poster-stamp"><i class="fa-solid fa-film"></i><span>BIG SCREEN<br>EXPERIENCE</span></div>
+            </div>
+        </div>
+        <a class="scroll-cue" href="#movies"><span></span> DISCOVER THE COLLECTION</a>
+        <div class="hero-bottom-line"></div>
+    </section>
+    <section class="movie-section section-pad" id="movies">
+        <div class="container">
+            <div class="section-heading movie-heading">
+                <div><p class="eyebrow"><span class="eyebrow-line"></span> THE BIG SCREEN STARTS HERE</p><h2>FIND YOUR <span>NEXT FILM.</span></h2></div>
+                <span class="movie-count" id="movieCount">12 films to explore</span>
+            </div>
+            <div class="movie-tools">
+                <div class="movie-filters" role="group" aria-label="Filter films by collection">
+                    <button class="filter-chip active" type="button" data-filter="all" aria-pressed="true">ALL FILMS <span>12</span></button>
+                    <button class="filter-chip" type="button" data-filter="indian" aria-pressed="false">INDIAN CINEMA <span>6</span></button>
+                    <button class="filter-chip" type="button" data-filter="superhero" aria-pressed="false">SUPERHERO SAGA <span>6</span></button>
+                </div>
+                <label class="movie-search"><i class="fa-solid fa-magnifying-glass"></i><input id="movieSearch" type="search" placeholder="Search movies..." aria-label="Search movies"><kbd>CTRL K</kbd></label>
+            </div>
+            <div class="movie-grid" id="movieGrid" aria-live="polite"><div class="loading-state"><span class="spinner-border spinner-border-sm"></span> Fetching the lineup...</div></div>
+            <div class="trending-block">
+                <div class="trending-heading"><p class="eyebrow"><span class="eyebrow-line"></span> THE CROWD HAS CHOSEN</p><h3>TRENDING <span>THIS WEEK</span></h3></div>
+                <div class="trending-grid" id="trendingGrid"></div>
+            </div>
+        </div>
+    </section>
+    <section class="experience-section" id="experience">
+        <div class="container"><div class="experience-card">
+            <div class="experience-icon"><span class="orbit-emblem"><i></i></span></div>
+            <div class="experience-copy"><p class="eyebrow">MADE FOR THE BIG SCREEN</p><h2>THIS IS MORE THAN<br><span>A MOVIE NIGHT.</span></h2><p>From Indian blockbusters to superhero adventures: premium picture, immersive sound, and a seat picked just for you.</p></div>
+            <a class="round-arrow" href="#movies" aria-label="Browse movies"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+            <span class="experience-watermark">CINEMA</span>
+        </div></div>
+    </section>
+    <section class="booking-section section-pad" id="bookingSection" hidden>
+        <div class="container"><div class="section-heading"><div><p class="eyebrow"><span class="eyebrow-line"></span> YOUR MISSION STARTS HERE</p><h2>RESERVE YOUR <span>SEATS.</span></h2></div><button class="close-booking" id="closeBooking" aria-label="Close booking"><i class="fa-solid fa-xmark"></i></button></div>
+            <div class="booking-layout">
+                <div class="booking-form glass-card">
+                    <div class="selected-movie" id="selectedMovie"></div>
+                    <div class="form-row"><label for="theatreSelect">CINEMA & CITY</label><select id="theatreSelect" class="form-select"><option>PVR ICON · Phoenix Palladium · Mumbai</option><option>INOX Megaplex · Malad · Mumbai</option><option>PVR IMAX · Koramangala · Bengaluru</option><option>Cinepolis IMAX · Forum Mall · Hyderabad</option><option>PVR Luxe · VR Chennai · Chennai</option><option>INOX Insignia · South City · Kolkata</option><option>PVR Superplex · Select Citywalk · New Delhi</option><option>Cinepolis · Lulu Mall · Kochi</option></select></div>
+                    <div class="form-row"><label>SELECT A DATE</label><div class="date-options" id="dateOptions"></div></div>
+                    <div class="form-row"><label>SHOWTIME</label><div class="time-options" id="timeOptions"></div></div>
+                    <div class="screen-label"><span></span><p>SCREEN THIS WAY</p><span></span></div>
+                    <div class="seat-map" id="seatMap" aria-label="Cinema seat selection"></div>
+                    <div class="seat-legend"><span><i class="seat-dot available"></i> AVAILABLE</span><span><i class="seat-dot chosen"></i> SELECTED</span><span><i class="seat-dot occupied"></i> TAKEN</span></div>
+                </div>
+                <aside class="booking-summary glass-card">
+                    <div class="summary-label">YOUR BOOKING <span class="summary-pulse"></span></div>
+                    <h3 id="summaryMovieTitle">Select a movie</h3><p class="summary-meta" id="summaryShowInfo">Choose your show details</p>
+                    <div class="summary-divider"></div>
+                    <div class="summary-line"><span>THEATRE</span><strong id="summaryTheatre">—</strong></div>
+                    <div class="summary-line"><span>SEATS</span><strong id="selectedSeatText">Select seats</strong></div>
+                    <div class="summary-line"><span>TICKETS</span><strong id="ticketCount">0</strong></div>
+                    <div class="summary-divider"></div>
+                    <div class="total-line"><span>TOTAL</span><strong id="totalAmount">₹0</strong></div>
+                    <p class="demo-note"><i class="fa-solid fa-shield-halved"></i> SECURE DEMO CHECKOUT · NO PAYMENT TAKEN</p>
+                    <button class="btn-primary-glow checkout-button" id="confirmBookingButton" disabled>CONFIRM BOOKING <i class="fa-solid fa-arrow-right"></i></button>
+                    <p class="checkout-error" id="checkoutError" role="alert"></p>
+                </aside>
+            </div>
+        </div>
+    </section>
+</main>
+<footer class="site-footer">
+    <div class="container footer-main"><div class="footer-brand"><a class="brand-lockup" href="#home"><span class="brand-mark"><i class="fa-solid fa-film"></i></span><span class="brand-text">CINEMA INDIA<small>BIG SCREEN STORIES</small></span></a><p>Pick a film. Pick your city. Make it a night.</p></div><div class="footer-note"><span>YOUR SEAT IS WAITING</span><p>INDIAN CINEMA. GLOBAL ADVENTURES.<br>ONE UNFORGETTABLE BIG SCREEN.</p></div><a class="back-top" href="#home">BACK TO TOP <i class="fa-solid fa-arrow-up"></i></a></div>
+    <div class="container footer-bottom"><span>© 2026 CINEMA INDIA · DEMO EXPERIENCE</span><span>NO PAYMENT IS PROCESSED ON THIS SITE</span></div>
+</footer>
+<div class="toast-container position-fixed bottom-0 end-0 p-3"><div id="appToast" class="toast text-bg-dark border-0" role="status"><div class="d-flex"><div class="toast-body" id="toastMessage"></div><button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button></div></div></div>
+<div class="modal fade" id="confirmationModal" tabindex="-1" aria-hidden="true"><div class="modal-dialog modal-dialog-centered"><div class="modal-content confirmation-modal"><div class="modal-body" id="confirmationContent"></div></div></div></div>
+<div class="modal fade" id="bookingsModal" tabindex="-1" aria-hidden="true"><div class="modal-dialog modal-dialog-centered modal-lg"><div class="modal-content confirmation-modal"><div class="modal-body" id="bookingsContent"></div></div></div></div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script th:src="@{/js/script.js}" src="/js/script.js"></script>
+</body>
+</html>
